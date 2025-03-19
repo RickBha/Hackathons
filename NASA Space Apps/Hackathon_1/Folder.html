@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Space Explorer</title>
+    <style>
+        body {
+            font-family: Fixedsys, Fixedsys;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            text-align: center;
+            color: white;
+        }
+        header h1 {
+            padding-top: 150px;
+            font-size: 4em;
+        }
+        nav {
+            background-color: #333;
+            padding: 1em;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        #games, #quiz {
+            display: flex;
+            justify-content: space-around;
+        }
+        .card {
+            background-color: #111;
+            padding: 15px;
+            border-radius: 8px;
+            width: 45%;
+            text-align: center;
+        }
+        .card h2 {
+            color: #ffcc00;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            color: #bbb;
+        }
+        #Space{
+            font-size: 120;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CHRONICLES OF EXOPLANET EXPLORATION</h1>
+</header>
+
+<nav>
+    <a href="#games">Games</a>
+    <a href="#quiz">Quiz</a>
+</nav>
+
+<section id="games">
+    <div class="card">
+        <h2>Interactive Space Game</h2>
+        <p>Embark on a journey through the stars. Explore distant galaxies, collect rare minerals, and avoid space debris!</p>
+        <a href="http://127.0.0.1:5500/Hackathon_1/Astronautgame.html">
+        <button class="button game">Play Game</button>
+        </a>
+    </div>
+    <div class="card">
+        <h2>Exoplanets</h2>
+        <p>This is where we know, what exatly are exoplanets!</p>
+        <a href="http://127.0.0.1:5500/Hackathon_1/Exoplanets.html">
+        <button class="button simulation">About Exoplanets</button>
+        </a>
+    </div>
+</section>
+
+<section id="quiz">
+    <div class="card">
+        <h2>Space Quiz</h2>
+        <p>Test your knowledge of the cosmos with this fun quiz. Can you answer all the questions correctly?</p>
+        <a href="http://127.0.0.1:5500/Hackathon_1/Quiz_1.html">
+        <button class="button quiz">Start Quiz</button>
+        </a>
+    </div>
+</section>
+
+<section id="about">
+    <h2>About Space</h2>
+    <p id="Space">Space is the boundless three-dimensional extent in which objects and events occur and have relative position and direction. It is a fascinating, mysterious frontier that humans have been exploring for decades, from landing on the moon to sending rovers to Mars. From our Earth-bound perspective, outer space is most often thought to begin about 62 miles (100 kilometers) above sea level at what is known as the Kármán line. The majority of space is relatively empty, with just stray bits of dust and gas floating around. This means that when humans send a probe to a distant planet or asteroid, the craft will not encounter "drag" in the same way that an airplane does as it sails through space.</p>
+</section>
+<footer>
+    <p>© 2024 Space Explorer. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

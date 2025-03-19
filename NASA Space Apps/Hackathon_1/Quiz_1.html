@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Quiz</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        body{
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-image: url("resul-mentes-DbwYNr8RPbg-unsplash.jpg");
+            background-size: cover;
+            
+        }
+        .question {
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .options {
+            line-height:2;
+            margin-left: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Exoplanet Quiz</h1>
+<form id="quizForm">
+    <div id="questionsContainer"></div>
+    <button type="submit">Submit Answers</button>
+</form>
+
+<div id="result" style="display:none; margin-top:20px;"></div>
+
+<script>
+    const questions = [
+    {
+        "question": "What is the term for a planet outside our solar system?",
+        "options": ["A) Intraplanet", "B) Exoplanet", "C) Distant Planet", "D) Hyperplanet"],
+        "answer": "B"
+    },
+    {
+        "question": "Which telescope was primarily responsible for the discovery of thousands of exoplanets?",
+        "options": ["A) Hubble Space Telescope", "B) Spitzer Space Telescope", "C) Kepler Space Telescope", "D) James Webb Space Telescope"],
+        "answer": "C"
+    },
+    {
+        "question": "What is the name of the first exoplanet discovered orbiting a sun-like star?",
+        "options": ["A) 51 Pegasi b", "B) HD 209458 b", "C) Gliese 581 c", "D) WASP-12 b"],
+        "answer": "A"
+    },
+    {
+        "question": "What does the 'habitable zone' refer to?",
+        "options": ["A) The region around a star suitable for life", "B) A zone within our solar system", "C) An area of high radiation", "D) A section of the Milky Way"],
+        "answer": "A"
+    },
+    {
+        "question": "Which exoplanet is often referred to as 'Earth's twin'?",
+        "options": ["A) Proxima Centauri b", "B) Kepler-452b", "C) TRAPPIST-1e", "D) LHS 1140 b"],
+        "answer": "B"
+    },
+    {
+        "question": "What method detects exoplanets by observing the dimming of a star's light?",
+        "options": ["A) Radial velocity", "B) Astrometry", "C) Transit method", "D) Direct imaging"],
+        "answer": "C"
+    },
+    {
+        "question": "Which exoplanet is known for its extreme temperatures and a lava-covered surface?",
+        "options": ["A) K2-141 b", "B) HD 189733 b", "C) WASP-76 b", "D) GJ 1214 b"],
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'super-Earth'?",
+        "options": ["A) A planet smaller than Earth", "B) A planet larger than Earth but smaller than Neptune", "C) A gas giant", "D) An asteroid"],
+        "answer": "B"
+    },
+    {
+        "question": "Which NASA mission was launched to directly image exoplanets?",
+        "options": ["A) TESS", "B) WFIRST", "C) HST", "D) Kepler"],
+        "answer": "B"
+    },
+    {
+        "question": "What is the name of the closest known star system with an exoplanet?",
+        "options": ["A) Alpha Centauri", "B) Barnard's Star", "C) Proxima Centauri", "D) Sirius"],
+        "answer": "C"
+    },
+    {
+        "question": "Which exoplanet was the first discovered using the radial velocity method?",
+        "options": ["A) 51 Pegasi b", "B) HD 209458 b", "C) Gliese 876 b", "D) WASP-1 b"],
+        "answer": "C"
+    },
+    {
+        "question": "What is the primary component of the atmosphere of the exoplanet HD 189733 b?",
+        "options": ["A) Oxygen", "B) Methane", "C) Water vapor", "D) Carbon dioxide"],
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is a characteristic of hot Jupiters?",
+        "options": ["A) Small size", "B) Low temperatures", "C) Close proximity to their stars", "D) Solid surfaces"],
+        "answer": "C"
+    },
+    {
+        "question": "What type of exoplanet is K2-18 b, which was found in the habitable zone?",
+        "options": ["A) Gas giant", "B) Super-Earth", "C) Ice giant", "D) Terrestrial"],
+        "answer": "B"
+    },
+    {
+        "question": "Which exoplanet has been found to have water vapor in its atmosphere?",
+        "options": ["A) WASP-39 b", "B) HD 209458 b", "C) TRAPPIST-1 d", "D) Kepler-186 f"],
+        "answer": "A"
+    },
+    {
+        "question": "What is the main reason exoplanets are difficult to detect?",
+        "options": ["A) They are too small", "B) They are too far away", "C) They reflect too much light", "D) They have no atmosphere"],
+        "answer": "B"
+    },
+    {
+        "question": "Which exoplanet system has seven Earth-sized planets?",
+        "options": ["A) TRAPPIST-1", "B) Kepler-186", "C) LHS 1140", "D) Kepler-22"],
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Rogue Planet'?",
+        "options": ["A) A planet with an unstable orbit", "B) A planet that doesn't orbit a star", "C) A planet in the habitable zone", "D) A planet with a complex atmosphere"],
+        "answer": "B"
+    },
+    {
+        "question": "What kind of light can astronomers use to analyze the atmosphere of an exoplanet?",
+        "options": ["A) Ultraviolet light", "B) Infrared light", "C) Visible light", "D) All of the above"],
+        "answer": "D"
+    },
+    {
+        "question": "Which is the largest known exoplanet as of now?",
+        "options": ["A) HD 100546 b", "B) WASP-17 b", "C) HR 8799 b", "D) Kepler-90 i"],
+        "answer": "B"
+    }
+];
+
+    const questionsContainer = document.getElementById("questionsContainer");
+
+    questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add("question");
+        questionDiv.innerHTML = `<strong>Q${index + 1}: ${q.question}</strong>`;
+        
+        const optionsDiv = document.createElement("div");
+        optionsDiv.classList.add("options");
+        q.options.forEach(option => {
+            optionsDiv.innerHTML += `
+                <label>
+                    <input type="radio" name="question${index}" value="${option.charAt(0)}">
+                    ${option}
+                </label><br>
+            `;
+        });
+        
+        questionDiv.appendChild(optionsDiv);
+        questionsContainer.appendChild(questionDiv);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let score = 0;
+
+        questions.forEach((q, index) => {
+            const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+            if (selectedOption) {
+                if (selectedOption.value === q.answer) {
+                    score++;
+                }
+            }
+        });
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `Your final score is ${score}/${questions.length}`;
+    });
+</script>
+<p></p>
+</body>
+</html>

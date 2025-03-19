@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronaut Exoplanet Explorer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="500" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Constants
+        const SCREEN_WIDTH = canvas.width;
+        const SCREEN_HEIGHT = canvas.height;
+        const GRAVITY = 0.05;
+        const JUMP_STRENGTH = 2.3;
+        const ASTRONAUT_WIDTH = 30;
+        const ASTRONAUT_HEIGHT = 42;
+        const ASTEROID_WIDTH = 100;
+        const GAP_HEIGHT = 255;
+        const SPEED = 1;
+        // Game variables
+        let astronaut, asteroids, score, isGameOver;
+
+        // Astronaut class
+        class Astronaut {
+            constructor() {
+                this.x = 50;
+                this.y = SCREEN_HEIGHT / 2;
+                this.yVelocity = SPEED;
+            }
+
+            jump() {
+                this.yVelocity = -JUMP_STRENGTH;
+            }
+
+            update() {
+                this.yVelocity += GRAVITY;
+                this.y += this.yVelocity;
+
+                if (this.y > SCREEN_HEIGHT - ASTRONAUT_HEIGHT) {
+                    this.y = SCREEN_HEIGHT - ASTRONAUT_HEIGHT;
+                    this.yVelocity = 0;
+                }
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.yVelocity = 0;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(this.x, this.y, ASTRONAUT_WIDTH, ASTRONAUT_HEIGHT);
+            }
+        }
+
+        // Asteroid class
+        class Asteroid {
+            constructor() {
+                this.x = SCREEN_WIDTH;
+                this.y = Math.random() * (SCREEN_HEIGHT - GAP_HEIGHT - ASTRONAUT_HEIGHT);
+            }
+
+            update() {
+                this.x -= SPEED;
+            }
+
+            draw() {
+                ctx.fillStyle = 'gray';
+                ctx.fillRect(this.x, this.y, ASTEROID_WIDTH, ASTRONAUT_HEIGHT);
+                ctx.fillRect(this.x, this.y + ASTRONAUT_HEIGHT + GAP_HEIGHT, ASTEROID_WIDTH, ASTRONAUT_HEIGHT);
+            }
+
+            isOffScreen() {
+                return this.x < -ASTEROID_WIDTH;
+            }
+
+            collides(astronaut) {
+                const astronautRect = {
+                    x: astronaut.x,
+                    y: astronaut.y,
+                    width: ASTRONAUT_WIDTH,
+                    height: ASTRONAUT_HEIGHT
+                };
+                return (
+                    (this.x < astronautRect.x + astronautRect.width && this.x + ASTEROID_WIDTH > astronautRect.x && this.y < astronautRect.y + astronautRect.height && this.y + ASTRONAUT_HEIGHT > astronautRect.y) ||
+                    (this.x < astronautRect.x + astronautRect.width && this.x + ASTEROID_WIDTH > astronautRect.x && this.y + ASTRONAUT_HEIGHT + GAP_HEIGHT < astronautRect.y + astronautRect.height && this.y + ASTRONAUT_HEIGHT + GAP_HEIGHT + ASTRONAUT_HEIGHT > astronautRect.y)
+                );
+            }
+        }
+
+        function init() {
+            astronaut = new Astronaut();
+            asteroids = [];
+            score = 0;
+            isGameOver = false;
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space' && !isGameOver) {
+                    astronaut.jump();
+                }
+            });
+            gameLoop();
+        }
+
+        function gameLoop() {
+            if (isGameOver) return;
+
+            ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+            score += 0.1;
+
+            astronaut.update();
+            astronaut.draw();
+
+            // Handle asteroids
+            if (asteroids.length === 0 || asteroids[asteroids.length - 1].x < SCREEN_WIDTH / 2) {
+                asteroids.push(new Asteroid());
+            }
+
+            asteroids.forEach((asteroid, index) => {
+                asteroid.update();
+                asteroid.draw();
+
+                // Check for collisions
+                if (asteroid.collides(astronaut)) {
+                    isGameOver = true;
+                }
+
+                if (asteroid.isOffScreen()) {
+                    asteroids.splice(index, 1);
+                }
+            });
+
+            // Display score
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Distance: ${Math.floor(score * 10)} KM`, 10, 20);
+            ctx.fillText("To Jump: SPACEBAR", 250, 380);
+
+            if (isGameOver) {
+                ctx.fillText("BOOM! You DIED :(", 150, 200);
+            } else {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotion Selector</title>
+    <title>Starry Background</title>
     <style>
         body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            background-color: white;
-            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
         h2 {
             font-size: 24px;
@@ -34,21 +51,33 @@
         .button:hover {
             background-color: darkgray;
         }
-        @keyframes hue {
-            0%{background-color: #808080;}
-            100% {background-color: #EBEBEB;}
-        }
-        body {
-            animation: hue 12s infinite alternate;
-        }
     </style>
 </head>
 <body>
 <h2>How are you feeling?</h2>
 <div class="button-container">
-    <button class="button" id="bad">Bad</button>
-    <button class="button" id="neutral">Neutral</button>
-    <button class="button" id="good">Good</button>
+    <a href="http://localhost:64641/Hackathon/Bad.html?_ijt=ov378e96349u0g0o1rg170j69i">
+        <button class="button" id="bad">Bad</button>
+    </a>
+    <a href="http://localhost:64641/Hackathon/Neutral.html?_ijt=ov378e96349u0g0o1rg170j69i">
+        <button class="button" id="neutral">Neutral</button>
+    </a>
+    <a href="http://localhost:64641/Hackathon/Good.html?_ijt=ov378e96349u0g0o1rg170j69i">
+        <button class="button" id="good">Good</button>
+    </a>
 </div>
+<script>
+    const numStars = 100;
+    const body = document.body;
+
+    for (let i = 0; i < numStars; i++) {
+        let star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * window.innerHeight + "px";
+        star.style.left = Math.random() * window.innerWidth + "px";
+        star.style.animationDelay = Math.random() * 2 + "s";
+        body.appendChild(star);
+    }
+</script>
 </body>
 </html>

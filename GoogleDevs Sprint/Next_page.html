@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Selector</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        .button {
+            background-color: lightgray;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: darkgray;
+        }
+        @keyframes hue {
+            0%{background-color: #808080;}
+            100% {background-color: #EBEBEB;}
+        }
+        body {
+            animation: hue 12s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+<h2>How are you feeling?</h2>
+<div class="button-container">
+    <button class="button">Bad</button>
+    <button class="button">Neutral</button>
+    <button class="button">Good</button>
+</div>
+</body>
+</html>

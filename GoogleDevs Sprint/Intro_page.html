@@ -1,75 +1,31 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            MindPal.ai
-        </title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+        .fade-out {
+            opacity: 0;
+            background-color: black !important;
+            transition: opacity 0.5s ease-out, background-color 6s ease-out;
         }
-
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 4rem;
-            color: black;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin: 0;
-        }
-
-        .circle-button {
-            background-color: #7f7f7f;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 2rem;
-            transition: background-color 0.3s, color 0.3s;
-            margin: 25px;
-        }
-
-        .circle-button:hover {
-            background-color: black;
-            color: white;
-
-        }
-
-        body {
-            animation: hue 12s infinite alternate;
-        }
-
-        @keyframes hue {
-            0%{background-color: #808080;}
-            100% {background-color: #EBEBEB;}
-        }
-
     </style>
-<body>
-<div class="container">
-<h1>
-    Hello
-</h1>
-    <a href="http://localhost:64641/Hackathon/Next_page.html?_ijt=h7mu2pcdh1hesqhofcv07hmhuo" target="_self">
-<button class="circle-button" title=":)">
-    <b>➜</b>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-gray-100 transition-colors duration-500">
+<h1 class="text-4xl font-semibold mb-6">Hello</h1>
+<button id="navigateButton" class="w-16 h-16 bg-black text-white flex items-center justify-center rounded-full transition-transform hover:scale-110">
+    ➜
 </button>
-    </a>
-</div>
+
+<script>
+    document.getElementById("navigateButton").addEventListener("click", function() {
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+            window.location.href = "http://localhost:64641/Hackathon/Next_page.html?_ijt=c6viv64r01n3qdu92bkhqenh8c"; // Change this link to the target page
+        }, 1000);
+    });
+</script>
 </body>
 </html>
